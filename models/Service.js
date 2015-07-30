@@ -1,5 +1,4 @@
 Service = new Mongo.Collection('Service');
-Schema = {};
 Schema.Question = new SimpleSchema({
   prompt: {
     type: String,
@@ -16,7 +15,7 @@ Schema.Question = new SimpleSchema({
       ]
     }
   }
-})
+});
 
 Schema.Service = new SimpleSchema({
     name: {
@@ -25,7 +24,11 @@ Schema.Service = new SimpleSchema({
     },
     spec: {
       type: [Schema.Question],
-      label: "Specification"
+      label: "Specifications"
+    },
+    disabled: {
+      type: Boolean,
+      defaultValue: false
     },
     createdAt: {
       type: Date,
@@ -43,8 +46,7 @@ Schema.Service = new SimpleSchema({
         omit: true
       }
     }
-  })
-);
+  });
 
 Service.attachSchema(Schema.Service);
 

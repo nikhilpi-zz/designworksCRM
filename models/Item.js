@@ -9,11 +9,14 @@ Schema.Item = new SimpleSchema({
       label: 'service',
       autoform: {
         options: function () {
-          return _.map(Service.find().fetch(), function (service) {
+          return _.map(Service.find({disabled: false}).fetch(), function (service) {
             return {label: service.name, value: service._id};
           });
         }
       }
+    },
+    locked: {
+      type: Boolean
     },
     cost: {
       type: Number
@@ -36,6 +39,9 @@ Schema.Item = new SimpleSchema({
     'addOns.$.cost': {
       type: Number
     },
+    'addOns.$.locked': {
+      type: Boolean
+    },
     createdAt: {
       type: Date,
       denyUpdate: true,
@@ -52,8 +58,7 @@ Schema.Item = new SimpleSchema({
         omit: true
       }
     }
-  })
-);
+  });
 
 Item.attachSchema(Schema.Item);
 

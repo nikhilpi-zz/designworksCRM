@@ -45,12 +45,11 @@ Schema.Client = new SimpleSchema({
     },
     phoneNumber: {
       type: Number
-    }
+    },
     address: {
       type: Schema.Address
     }
-  })
-);
+  });
 
 Meteor.users.attachSchema(Schema.Client)
 

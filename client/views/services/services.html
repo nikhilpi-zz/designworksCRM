@@ -1,0 +1,15 @@
+<template name="services">
+  <div class="container">
+  {{#afModal formId="newService" class="btn btn-primary" collection="Service" operation="insert" title="New Service"}}
+    New Service
+  {{/afModal}}
+  {{> reactiveTable settings=settings}}
+  </div>
+</template>
+
+
+<template name="editServiceBtn">
+  {{#afModal formId="editService" class="btn btn-primary" collection="Service" operation="update" title="Edit Service" doc=_id}}
+    Edit
+  {{/afModal}}
+</template>

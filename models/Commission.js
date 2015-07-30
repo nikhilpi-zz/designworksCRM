@@ -19,12 +19,14 @@ Schema.Commission = new SimpleSchema({
     'addOns.$.cost': {
       type: Number
     },
+    'addOns.$.locked': {
+      type: Boolean
+    },
     createdAt: {
       type: Date,
       denyUpdate: true
     }
-  })
-);
+  });
 
 Commission.attachSchema(Schema.Commission);
 

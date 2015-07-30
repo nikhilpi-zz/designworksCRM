@@ -1,13 +1,12 @@
 <template name="basicLayout">
-    <div id="main">
-        <header>
-            {{> header}}
-        </header>
+    {{> autoformModals}}
+    <header>
+        {{> header}}
+    </header>
 
-            {{> yield}}
-            {{! Also a sidebar! }}
-        <footer>
-            {{> footer}}
-        </footer>
-    </div>
+        {{> yield}}
+        {{! Also a sidebar! }}
+    <footer>
+        {{> footer}}
+    </footer>
 </template>
