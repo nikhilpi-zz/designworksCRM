@@ -1,6 +1,9 @@
 Item = new Mongo.Collection('Item');
 
 Schema.Item = new SimpleSchema({
+    client: {
+      type: String
+    },
     designer: {
       type: String
     },

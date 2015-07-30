@@ -1,3 +1,8 @@
 Meteor.publish('Items', function () {
-  return Item.find();
+  if(Roles.userIsInRole(this.userId, ['admin'])){
+    return Item.find();
+  } else {
+    return Item.find({client: Meteor.userId});
+  }
+  
 });

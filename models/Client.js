@@ -19,10 +19,6 @@ Schema.Address = new SimpleSchema({
 
 
 Schema.Client = new SimpleSchema({
-    username: {
-        type: String,
-        regEx: /^[a-z0-9A-Z_]{3,15}$/
-    },
     emails: {
         type: [Object],
         // this must be optional if you also use other login services like facebook,
@@ -37,17 +33,35 @@ Schema.Client = new SimpleSchema({
         type: Boolean
     },
     createdAt: {
-        type: Date
+      type: Date,
+      denyUpdate: true,
+      autoValue: function() {
+        if (this.isInsert) {
+          return new Date;
+        } else if (this.isUpsert) {
+          return {$setOnInsert: new Date};
+        } else {
+          this.unset();
+        }
+      },
+      autoform: {
+        omit: true
+      }
     },
     commisions: {
         type: [String],
         optional: true
     },
+    organization: {
+      type: String
+    },
     phoneNumber: {
-      type: Number
+      type: Number,
+      optional: true
     },
     address: {
-      type: Schema.Address
+      type: Schema.Address,
+      optional: true
     }
   });
 

@@ -1,7 +1,4 @@
 Template['services'].helpers({
-  Service: function () {
-    return Service;
-  },
   settings: function () {
     return {
       collection: Service,

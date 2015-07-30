@@ -5,13 +5,34 @@ Schema.Commission = new SimpleSchema({
       type: String
     },
     items: {
-      type: [String]
+      type: [String],
+      optional: true
     },
     dueDate: {
-      type: Date
+      type: Date,
+      optional: true
+    },
+    startDate: {
+      type: Date,
+      optional: true
+    },
+    status: {
+      type: String,
+      defaultValue: 'specs',
+      autoform: {
+        options: [
+          {label: "Specs Filled", value: "specs"},
+          {label: "Contract Signed", value: "contract"},
+          {label: "First Draft", value: "draft"},
+          {label: "Complete", value: "done"},
+          {label: "Revisions", value: "revisions"},
+          {label: "Paid", value: "paid"},
+        ]
+      }
     },
     addOns: {
-      type: [Object]
+      type: [Object],
+      optional: true
     },
     'addOns.$.name': {
       type: String
@@ -20,11 +41,24 @@ Schema.Commission = new SimpleSchema({
       type: Number
     },
     'addOns.$.locked': {
-      type: Boolean
+      type: Boolean,
+      defaultValue: false
     },
     createdAt: {
       type: Date,
-      denyUpdate: true
+      denyUpdate: true,
+      autoValue: function() {
+        if (this.isInsert) {
+          return new Date;
+        } else if (this.isUpsert) {
+          return {$setOnInsert: new Date};
+        } else {
+          this.unset();
+        }
+      },
+      autoform: {
+        omit: true
+      }
     }
   });
 

@@ -2,7 +2,14 @@ function loadUser(user) {
   var userAlreadyExists = typeof Meteor.users.findOne({ username : user.username }) === 'object';
 
   if (!userAlreadyExists) {
-    Accounts.createUser(user);
+    var id;
+
+    id = Accounts.createUser(user);
+
+    if (user.roles.length > 0) {
+      Roles.addUsersToRoles(id, user.roles);
+    }
+
   }
 }
 
